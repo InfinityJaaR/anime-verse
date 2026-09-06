@@ -4,7 +4,7 @@ Landing page y catálogo de anime construido con **Next.js 16 (App Router)** y *
 
 > Proyecto académico de Kodigo — actividad *"Dominio del App Router y Gestión de Datos: Construcción de Rutas Dinámicas y Persistencia con servicio serverless"*.
 
-**Demo en producción:** _(pendiente de despliegue)_
+**Demo en producción:** <https://anime-verse-olive-tau.vercel.app>
 
 ---
 
@@ -295,6 +295,11 @@ vercel --prod
 ```
 
 Vercel detecta Next.js automáticamente; no hace falta configurar comando de build ni directorio de salida.
+
+El repositorio quedó conectado a Vercel, así que cada push a `main` dispara un despliegue
+automático.
+
+Despliegue actual: <https://anime-verse-olive-tau.vercel.app>
 
 ---
 
