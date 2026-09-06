@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Tokens del tema — sintaxis @theme de Tailwind CSS v4.
+   Cada token se expone automáticamente como utilidad (bg-fondo, text-tenue…).
+   ========================================================================== */
+@theme {
+  /* Superficies, de más oscura a más clara */
+  --color-fondo: #08080c;
+  --color-superficie: #101018;
+  --color-superficie-alta: #191926;
+  --color-borde: #262636;
+
+  /* Texto */
+  --color-texto: #f4f4f7;
+  --color-tenue: #9a9aae;
+
+  /* Acentos */
+  --color-acento: #a855f7;
+  --color-acento-suave: #c084fc;
+
+  /* Tipografía */
+  --font-sans: var(--fuente-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--fuente-display), ui-sans-serif, system-ui, sans-serif;
+
+  /* Curva de animación compartida */
+  --ease-suave: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+html {
+  scroll-behavior: smooth;
+  /* Compensa la altura del header fijo al saltar a un ancla */
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-wrap: pretty;
+}
+
+/* Halo radial sutil detrás del contenido, fijo al viewport */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 40rem at 15% -10%, color-mix(in oklab, var(--color-acento) 16%, transparent), transparent 70%),
+    radial-gradient(50rem 35rem at 90% 0%, color-mix(in oklab, #3b82f6 12%, transparent), transparent 70%);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* Foco visible y coherente en toda la app (accesibilidad por teclado) */
+:focus-visible {
+  outline: 2px solid var(--color-acento-suave);
+  outline-offset: 3px;
+  border-radius: 0.35rem;
+}
+
+/* ==========================================================================
+   Utilidades propias
+   ========================================================================== */
+
+/* Contenedor central con los mismos márgenes en toda la app */
+@utility contenedor {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+
+  @media (width >= 48rem) {
+    padding-inline: 2rem;
+  }
+}
+
+/* Aparición al cargar; se desactiva si el usuario reduce el movimiento */
+@utility aparecer {
+  animation: aparecer 0.5s var(--ease-suave) both;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
