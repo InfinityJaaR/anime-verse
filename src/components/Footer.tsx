@@ -12,8 +12,9 @@ export function Footer() {
       </div>
       <div className="contenedor pb-8">
         <p className="text-xs text-tenue/70">
-          Metadatos y portadas provenientes de MyAnimeList a través de la API
-          pública Jikan. Uso exclusivamente educativo, sin fines comerciales.
+          Metadatos y portadas provenientes de MyAnimeList (API pública Jikan) y
+          de AniList. Las sinopsis son redacciones propias. Uso exclusivamente
+          educativo, sin fines comerciales.
         </p>
       </div>
     </footer>

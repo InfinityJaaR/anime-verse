@@ -18,7 +18,7 @@ export default async function PaginaInicio() {
   // Las dos consultas son independientes: se lanzan en paralelo en lugar de
   // encadenar dos await y pagar la latencia dos veces.
   const [destacados, generos] = await Promise.all([
-    getAnimesDestacados(5),
+    getAnimesDestacados(11), // 1 para el hero + 10 para la rejilla
     getGeneros(),
   ]);
 

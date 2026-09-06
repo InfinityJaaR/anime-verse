@@ -43,8 +43,3 @@ yarn-error.log*
 next-env.d.ts
 .gstack/
 
-# archivos de asistentes/herramientas: los regenera la tooling local,
-# no forman parte de la implementacion
-AGENTS.md
-CLAUDE.md
-.gstack/

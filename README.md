@@ -66,13 +66,13 @@ Requiere **Node.js 20.9 o superior** (mínimo exigido por Next.js 16).
 
 ### Landing page
 
-Hero, series destacadas y los seis géneros, todo leído desde Supabase en el servidor.
+Hero, once series destacadas y los doce géneros, todo leído desde Supabase en el servidor.
 
 ![Landing page](./screenshots/01-landing.png)
 
 ### Catálogo completo — `/animes`
 
-Las 10 series ordenadas por puntuación, con su género y datos reales.
+Las 50 series ordenadas por puntuación, con su género y datos reales.
 
 ![Catálogo](./screenshots/02-catalogo.png)
 
@@ -87,6 +87,12 @@ Ficha de detalle: portada, ficha técnica, sinopsis, temas y series del mismo g�
 Listado de un género, teñido con su color y con la puntuación media calculada.
 
 ![Página de género](./screenshots/04-genero.png)
+
+### Índice de géneros — `/generos`
+
+Los doce géneros con el número de series de cada uno.
+
+![Índice de géneros](./screenshots/09-generos.png)
 
 ### Loading state
 
@@ -117,7 +123,7 @@ página personalizada.
 anime-verse/
 ├── supabase/
 │   ├── schema.sql              # Tablas, índices y políticas RLS
-│   └── seed.sql                # 6 géneros + 10 animes de ejemplo
+│   └── seed.sql                # 12 géneros + 50 animes de ejemplo
 ├── src/
 │   ├── app/
 │   │   ├── layout.tsx          # Shell, fuentes y metadatos base
@@ -163,7 +169,7 @@ npm install
 
 1. Entra a [supabase.com](https://supabase.com) y crea un proyecto nuevo (el plan gratuito basta).
 2. Abre **SQL Editor → New query**, pega el contenido de [`supabase/schema.sql`](./supabase/schema.sql) y pulsa **Run**. Esto crea las tablas `generos` y `animes` con sus políticas RLS.
-3. Abre otra query, pega [`supabase/seed.sql`](./supabase/seed.sql) y ejecútala. Inserta 6 géneros y 10 animes.
+3. Abre otra query, pega [`supabase/seed.sql`](./supabase/seed.sql) y ejecútala. Inserta 12 géneros y 50 animes.
 
 Ambos scripts son idempotentes: se pueden volver a ejecutar sin duplicar datos ni provocar errores.
 
@@ -266,7 +272,7 @@ en Supabase necesita un build para ser accesible, un compromiso razonable para u
 curado.
 
 **Portadas remotas con plan B.**
-Las imágenes vienen del CDN público de MyAnimeList, declarado en `remotePatterns` de `next.config.ts` (`images.domains` quedó obsoleto en Next.js 16). Como depender de un CDN externo es frágil, `PosterImage` captura el `onError` y dibuja un degradado con el color del género y las iniciales del título.
+Las imágenes vienen de los CDN públicos de MyAnimeList y AniList, ambos declarados en `remotePatterns` de `next.config.ts` (`images.domains` quedó obsoleto en Next.js 16). Que hagan falta dos no fue una decisión de diseño: MyAnimeList se cayó a mitad de la carga de datos y las series restantes se obtuvieron de AniList. Precisamente porque depender de un CDN externo es frágil, `PosterImage` captura el `onError` y dibuja un degradado con el color del género y las iniciales del título.
 
 ---
 
@@ -305,4 +311,6 @@ Despliegue actual: <https://anime-verse-olive-tau.vercel.app>
 
 ## Créditos
 
-Metadatos y portadas de las series provienen de [MyAnimeList](https://myanimelist.net) a través de la API pública [Jikan](https://jikan.moe). Las sinopsis son redacciones propias. Uso exclusivamente educativo, sin fines comerciales.
+Los metadatos y las portadas provienen de [MyAnimeList](https://myanimelist.net) —a través de la API pública [Jikan](https://jikan.moe)— y de [AniList](https://anilist.co). Se usaron dos fuentes porque MyAnimeList estuvo caído durante la carga de datos; por eso `next.config.ts` declara los dos CDN en `remotePatterns`. Cada identificador se validó comparando el título devuelto con el esperado antes de insertarlo.
+
+Los títulos en español, las sinopsis y las etiquetas son redacciones propias. Uso exclusivamente educativo, sin fines comerciales.
