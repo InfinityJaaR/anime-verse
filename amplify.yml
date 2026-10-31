@@ -1,0 +1,20 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        # Amplify no expone las variables NEXT_PUBLIC_* al build de Next.js por sí solo:
+        # se vuelcan a .env.production para que queden incrustadas en el bundle.
+        - env | grep -E '^NEXT_PUBLIC_' >> .env.production
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - .next/cache/**/*

@@ -19,6 +19,7 @@ Landing page y catálogo de anime construido con **Next.js 16 (App Router)** y *
 - [Base de datos y RLS](#base-de-datos-y-rls)
 - [Decisiones técnicas](#decisiones-técnicas)
 - [Despliegue en Vercel](#despliegue-en-vercel)
+- [Despliegue en AWS Amplify](#despliegue-en-aws-amplify)
 
 ---
 
@@ -306,6 +307,42 @@ El repositorio quedó conectado a Vercel, así que cada push a `main` dispara un
 automático.
 
 Despliegue actual: <https://anime-verse-olive-tau.vercel.app>
+
+---
+
+## Despliegue en AWS Amplify
+
+**URL pública (AWS Amplify):** _pendiente de desplegar_
+
+### Ejecutar el proyecto en local
+
+```bash
+git clone https://github.com/InfinityJaaR/anime-verse.git
+cd anime-verse
+cp .env.example .env.local   # completa NEXT_PUBLIC_SUPABASE_URL y NEXT_PUBLIC_SUPABASE_ANON_KEY
+npm ci
+npm run dev                  # http://localhost:3000
+npm run build && npm start   # build de producción
+```
+
+### Pasos en AWS Amplify
+
+1. En la consola de AWS → **AWS Amplify** → **Create new app** → **GitHub**, autorizar el acceso.
+2. Elegir el repositorio `anime-verse` y la rama `main`. Amplify detecta Next.js (SSR) y usa el [`amplify.yml`](amplify.yml) del repositorio (`npm ci` + `npm run build`).
+3. En **Environment variables** agregar las mismas variables de `.env.local` (nunca se sube el `.env` real al repositorio):
+
+   | Variable | Valor |
+   |---|---|
+   | `NEXT_PUBLIC_SUPABASE_URL` | URL del proyecto de Supabase |
+   | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | clave `anon` / publishable |
+
+4. **Save and deploy** y esperar a que el estado sea **Deployed**. Cada push a `main` redespliega automáticamente.
+
+### Evidencia del despliegue
+
+![Amplify: build Deployed](docs/screenshots/amplify-deployed.png)
+
+![Aplicación en producción](docs/screenshots/app-en-produccion.png)
 
 ---
 
