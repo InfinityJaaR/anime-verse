@@ -312,7 +312,7 @@ Despliegue actual: <https://anime-verse-olive-tau.vercel.app>
 
 ## Despliegue en AWS Amplify
 
-**URL pública (AWS Amplify):** _pendiente de desplegar_
+**URL pública (AWS Amplify):** <https://main.d2sl5a2wutrk7e.amplifyapp.com>
 
 ### Ejecutar el proyecto en local
 
@@ -340,9 +340,9 @@ npm run build && npm start   # build de producción
 
 ### Evidencia del despliegue
 
-![Amplify: build Deployed](docs/screenshots/amplify-deployed.png)
+![Amplify: build Deployed](docs/screenshots/amplify-deployed.jpg)
 
-![Aplicación en producción](docs/screenshots/app-en-produccion.png)
+![Aplicación en producción](docs/screenshots/app-en-produccion.jpg)
 
 ---
 
